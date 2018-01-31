@@ -7,8 +7,7 @@ queue1 = Queue()
 queue2 = Queue()
 
 def usage():
-    print("Usage: %s -C cityname -c configfile -d userdata -o resultdata"%sys.argv[0])
-    sys.exit()
+    print("Usage: %s -C cityname -c configfile -d userdata -o resultdata --help -h"%sys.argv[0])
     
 # python3 calculator_file.py -C CHENGDU -c cal.cfg -d user.csv -o salary.csv
 
@@ -17,48 +16,28 @@ try:
 except getopt.GetoptError as err:
     print(str(err))
     usage()
+    sys.exit(2)
 
-parameter_count = []
 for o,a in optlist:
-#    print(optlist)
     if o in ['-h','--help']:
         usage()
+        sys.exit(0)
     elif o == '-C':
         cityname = a
     elif o == '-c':
         configfile = a
-        if not os.path.exists(configfile):
-            print('Can not find config file.')
-            sys.exit()
-        parameter_count.append('configfile')
     elif o == '-d':
         userfile = a
-        if not os.path.exists(userfile):
-            print('Can not find user file')
-            sys.exit()
-        parameter_count.append('userfile')
     elif o == '-o':
         salaryfile = a
-        parameter_count.append('salaryfile')
     else:
         assert False, 'Unhandled options'
-
-if 'configfile' not in parameter_count:
-    print('Can not find Config file!')
-    usage()
-elif 'userfile' not in parameter_count:
-    print('Can not find user file!')
-    usage()
-elif 'salaryfile' not in parameter_count:
-    print('Can not find result data!')
-    usage()
-
 
 #configfile = args[args.index('-c') + 1]
 #userfile = args[args.index('-d') + 1]
 #salaryfile = args[args.index('-o') + 1]
-#if not os.path.exists(configfile) or not os.path.exists(userfile):
-#   print('Can not find configfile or userfile, Please check again!')
+if not os.path.exists(configfile) or not os.path.exists(userfile):
+   print('Can not find configfile or userfile, Please check again!')
 
 #print('configfile: %s , userfile: %s , salaryfile: %s '%(configfile,userfile,salaryfile))
 
@@ -88,7 +67,7 @@ class Config(object):
                 self.conf[key] = float(config[cityname][key])
             except:
                 self.conf[key] = config[cityname][key]
-#        print(self.conf)
+        print(self.conf)
         if conf_key == 0: 
             return self.conf
         else: 
@@ -149,7 +128,7 @@ class UserData(object):
             self.user[user_id]['insurance'] = insurance
             self.user[user_id]['tax'] = tax
             self.user[user_id]['salary_final'] = salary_final
-            exc_date = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M%S')[:-2]
+            exc_date = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M%S')
             self.user[user_id]['date'] = exc_date
         queue2.put(self.user)            
 #            print(self.user[user_id])   
