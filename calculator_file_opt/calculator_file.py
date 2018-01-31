@@ -68,21 +68,17 @@ class Config(object):
         self.filename = configfile
 
     def get_conf(self, cityname = 'DEFAULT', conf_key = 0):
-#        with open(self.filename,'r') as f:
-#            for lines in f.readlines():
-#                key,value = lines.split('=')
-#                key = key.strip()
-#                value = value.strip()
-#                try:
-#                    self.conf[key] = float(value)
-#                except ValueError:
-#                    self.conf[key] = value
         config = configparser.ConfigParser()
         config.read(self.filename)
+        city_check = 0
         if cityname != 'DEFAULT':
             for cname in config.sections():
                 if cityname.lower() == cname.lower():
                     cityname = cname
+                    city_check = 1
+            if city_check == 0:
+                print('Can not find relate city!')
+                usage()
         for key in config[cityname]:
             try:
                 self.conf[key] = float(config[cityname][key])
@@ -178,7 +174,7 @@ class UserData(object):
   
 if __name__ == '__main__':
     conf = Config(configfile)
-    config = conf.get_conf()
+    config = conf.get_conf(cityname)
     user = UserData(userfile)
     user.run_calculator(config,salaryfile)
                 
