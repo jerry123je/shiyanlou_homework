@@ -46,18 +46,28 @@ class Config(object):
         self.filename = configfile
 
     def get_conf(self, cityname = 'DEFAULT', conf_key = 0):
-        with open(self.filename,'r') as f:
-            for lines in f.readlines():
-                key,value = lines.split('=')
-                key = key.strip()
-                value = value.strip()
-                try:
-                    self.conf[key] = float(value)
-                except ValueError:
-                    self.conf[key] = value
-#        print(self.conf)
-       # print(conf_key)
-        if conf_key == 0:
+#        with open(self.filename,'r') as f:
+#            for lines in f.readlines():
+#                key,value = lines.split('=')
+#                key = key.strip()
+#                value = value.strip()
+#                try:
+#                    self.conf[key] = float(value)
+#                except ValueError:
+#                    self.conf[key] = value
+        config = configparser.ConfigParser()
+        config.read(self.filename)
+        if cityname != 'DEFAULT':
+            for cname in config.sections():
+                if cityname.lower() == cname.lower():
+                    cityname = cname
+        for key in config[cityname]:
+            try:
+                self.conf[key] = float(config[cityname][key])
+            except:
+                self.conf[key] = config[cityname][key]
+        print(self.conf)
+        if conf_key == 0: 
             return self.conf
         else: 
             return self.conf.get(conf_key)
