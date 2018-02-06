@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block header %}
+    <h1> Index </h1>
+{% endblock %}
+
+{% block content %}
+    {% for file_name in artical.keys %}
+        <span> {{ file_name }} </span>
+        <span> {{ artical.file_name.title }} </span>
+    {% endfor %}    
+{% endblock %}
