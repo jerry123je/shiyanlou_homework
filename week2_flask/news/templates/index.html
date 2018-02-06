@@ -4,8 +4,20 @@
 {% endblock %}
 
 {% block content %}
-    {% for file_name in artical.keys %}
-        <span> {{ file_name }} </span>
-        <span> {{ artical.file_name.title }} </span>
+
+    <table border='1'>
+    {% for key in artical.keys() %}
+	<tr>
+	<td> {{ key }}.json </td>
+       {# <span> {{ artical.key.title }} </span> #}
+        <td> {{ artical[key].title }} </td> 
+	</tr>
     {% endfor %}    
+    </table>
+
+{#
+{% for key in artical.keys() %}
+<p> {{ key }} </p>
+{% endfor %}
+#}
 {% endblock %}
