@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block header %}
+	<h1> File info </h1>
+{% endblock %}
+
+{% block content %}
+    <table border='1'>
+    {# for key,value in artical[filename].items() #}
+	<tr>
+	<td> Artical content </td>
+	<td> {{ file_info.content }} </td>
+	</tr>
+	<tr>
+	<td> Artical create time </td>
+    <td> {{ file_info.created_time }} </td>
+	</tr>
+	<tr>
+	<td> Artical category </td>
+	<td> {{ file_info.category.name }} </td>
+	</tr>
+    {# endfor #}
+{% endblock %}
