@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block header %}
+    <h1> Index </h1>
+{% endblock %}
+
+{% block content %}
+
+    <table border='1'>
+    {% for file_object in files %}
+	<tr>
+        <td> <a href=/files/{{ file_object.id }}>{{ file_object.title }}</a></td>
+        <td>
+            {% for tag in file_object.tags %}
+                {{ tag }},
+            {% endfor %}
+        </td>
+	</tr>
+    {% endfor %}    
+    </table>
+
+{% endblock %}
