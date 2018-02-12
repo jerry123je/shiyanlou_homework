@@ -49,7 +49,8 @@ class File(db.Model):
         if tag_name not in self.tags:
             self._file_tag.append(tag_name)
             self.tags = self._file_tag
-
+	# we could also use $addtoset 
+ 
     def remove_tag(self, tag_name):
         if tag_name in self.tags:
             self._file_tag.remove(tag_name)
@@ -64,6 +65,7 @@ class File(db.Model):
         else:
             self._file_tag = _tag_check['tags']
         return self._file_tag
+	# we could also use $pull 
        
     @tags.setter
     def tags(self, _new_tag):
