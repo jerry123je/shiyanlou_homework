@@ -6,7 +6,7 @@ from flask_doc.items import PageItem
 import re
 
 
-class FlaskSpider(scrapy.Spider.CrawlSpider):
+class FlaskSpider(scrapy.spiders.CrawlSpider):
     name = 'flask'
     allowed_domains = ['flask.pocoo.org']
     start_urls = ['http://flask.pocoo.org/docs/0.12/']
@@ -17,6 +17,7 @@ class FlaskSpider(scrapy.Spider.CrawlSpider):
 
     def parse_page(self, response):
         item = PageItem()
+        print(type(item))
         item['url'] = response.url
         item['text'] = response.css('div.body').extract_first()
         yield item
