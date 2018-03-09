@@ -5,7 +5,6 @@ from scrapy.linkextractors import LinkExtractor
 from flask_doc.items import PageItem
 import re
 
-
 class FlaskSpider(scrapy.spiders.CrawlSpider):
     name = 'flask'
     allowed_domains = ['flask.pocoo.org']
