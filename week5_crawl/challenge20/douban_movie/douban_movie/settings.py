@@ -43,15 +43,15 @@ COOKIES_ENABLED = False
 #   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 #   'Accept-Language': 'en',
 #}
-DEFAULT_REQUEST_HEADERS = {
-    'Host': 'movie.douban.com',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; x64; rv:58.0) Gecko/20    100101 Firefox/58.0',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.    8',
-    'Accept-Language': 'en',
-    'Accept-Encoding': 'gzip, deflate, bz',
-    'Connection': 'keep-alive',
-    'Upgrade-Insecure-Requests': '1',
-    }
+#DEFAULT_REQUEST_HEADERS = {
+#    'Host': 'movie.douban.com',
+#    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; x64; rv:58.0) Gecko/20    100101 Firefox/58.0',
+#    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.    8',
+#    'Accept-Language': 'zh-CN, zh; q=0.8, zh-TW; q=0.7, zh-HK; q=0.3, en; q=0.2',
+#    'Accept-Encoding': 'gzip, deflate, bz',
+#    'Connection': 'keep-alive',
+#    'Upgrade-Insecure-Requests': '1',
+#    }
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
@@ -65,7 +65,8 @@ DEFAULT_REQUEST_HEADERS = {
 #    'douban_movie.middlewares.DoubanMovieDownloaderMiddleware': none,
 #}
 DOWNLOADER_MIDDLEWARES = {
-    'douban_movie.middlewares.UserAgentMiddleware': 543,
+    'douban_movie.middlewares.DoubanMovieDownloaderMiddleware': None,
+    'douban_movie.middlewares.UserAgentMiddleware': 400,
 }
 
 # Enable or disable extensions

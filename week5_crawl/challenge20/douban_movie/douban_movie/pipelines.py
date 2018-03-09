@@ -7,6 +7,7 @@
 import re
 import redis
 import json
+from scrapy.exceptions import DropItem
 
 class DoubanMoviePipeline(object):
     movie_list = []
@@ -20,6 +21,8 @@ class DoubanMoviePipeline(object):
                 self.movie_list.append(item['name'])
                 item = json.dumps(item.__dict__)
                 self.redis.lpush("douban_movie:items",item)
+            else:
+                raise DropItem('Movie %s already logged'%item['name'])
         return item
 
     def open_spider(self, spider):
