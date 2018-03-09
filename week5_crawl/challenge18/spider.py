@@ -19,7 +19,7 @@ def parse(response):
         results.append(result)
   
 def has_next_page(response):    
-    if 'disabled next-page' not in response.css('ul.pagination').extract():
+    if not response.xpath('//li[@class="disabled next-page"]').extract():
         return True
     else:
         return False
