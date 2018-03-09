@@ -8,14 +8,12 @@ import re
 import redis
 import json
 
-
-
 class DoubanMoviePipeline(object):
     def process_item(self, item, spider):
-        item['summary'] = re.sub('<[^>]+>','',item['summary'])
-        item = json.dumps(item.__dict__)
+        item['summary'] = re.sub('<[^>]+>','',str(item['summary']))
         item['score'] = float(item['score'])
         if item['score'] >= 8.0:
+            item = json.dumps(item.__dict__)
             self.redis.lpush("douban_movie:items".item)
         return item
 

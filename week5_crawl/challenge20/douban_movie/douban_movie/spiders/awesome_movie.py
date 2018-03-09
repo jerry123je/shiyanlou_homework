@@ -11,7 +11,7 @@ class AwesomeMovieSpider(scrapy.spiders.CrawlSpider):
     start_urls = ['https://movie.douban.com/subject/3011091']
 
     rules = (
-            Rule(LinkExtractor(restrict_xpaths=('//li[@class="recommendations-bd"]/dl/dt/a')), callback="parse_movie_item", follow=True),
+            Rule(LinkExtractor(restrict_xpaths=('//div[@class="recommendations-bd"]/dl/dt/a')), callback="parse_movie_item", follow=True),
             )
     def parse_movie_item(self, response):
         item = MovieItem()
