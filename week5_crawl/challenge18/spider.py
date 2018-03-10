@@ -15,9 +15,9 @@ results = []
 def parse(response):
     for comment in response.css('div.comment-list-item'):
         result = {}
-        result['username'] = response.css('div.user-username a::text').extract_first()
+        result['username'] = comment.css('div.user-username a::text').extract_first()
         result['username'] = result['username'].strip()
-        result['content'] = response.css('div.comment-item-content p').extract()
+        result['content'] = comment.css('div.comment-item-content p').extract()
         result['content'] = re.sub('<[^>]+>','',' '.join(result['content']))
         results.append(result)
   
