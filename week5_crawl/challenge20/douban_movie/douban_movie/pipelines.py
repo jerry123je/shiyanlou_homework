@@ -19,7 +19,7 @@ class DoubanMoviePipeline(object):
         if item['score'] >= 8.0:
             if item['name'] not in self.movie_list:
                 self.movie_list.append(item['name'])
-                item = json.dumps(item.__dict__)
+                item = json.dumps(item.__dict__['_values'])
                 self.redis.lpush("douban_movie:items",item)
             else:
                 raise DropItem('Movie %s already logged'%item['name'])
