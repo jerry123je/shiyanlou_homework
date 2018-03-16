@@ -23,7 +23,7 @@ def data_plot():
 
     data1 = data[['user_id','minutes']].groupby('user_id').sum()
     
-    data1.plot(ax=ax)
+    ax.plot(data1)
 
     plt.show()
     return ax
