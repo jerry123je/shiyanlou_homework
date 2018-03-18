@@ -3,7 +3,7 @@
 
 import pandas as pd
 
-def quarter_volumn():
+def quarter_volume():
 	data = pd.read_csv('apple.csv', parse_dates=['Date'], index_col=['Date'])
 	quarter = data.resample('Q').sum()
 	quarter_sort = quarter.sort_values(axis=0, ascending=False, by='Volume')
@@ -12,4 +12,4 @@ def quarter_volumn():
 	return second_volume
 
 
-print(quarter_volumn())
+print(quarter_volume())
