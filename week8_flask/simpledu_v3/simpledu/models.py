@@ -1,16 +1,17 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 db = SQLAlchemy()
 
 class Base(db.Model):
     __abstract__ = True
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    udpated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 
-class User(db.Model):
+class User(Base, UserMixin):
     __tablename__ = 'user'
 
     ROLE_USER = 10
@@ -49,7 +50,7 @@ class User(db.Model):
     def is_staff(self):
         return self.role == self.ROLE_STAFF
 
-class Course(db.Model):
+class Course(Base):
     __tablename__ = 'course'
 
     id = db.Column(db.Integer, primary_key=True)
