@@ -36,7 +36,7 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('记住我')
 
     def validate_email(self, field):
-        if field.data and not User.query.filter_by(email=field.data).first():
+        if field_data and not User.query.filter_by(email=field.data).first():
             raise ValidationError('Email do not exists')
 
     def validate_password(self,field):
